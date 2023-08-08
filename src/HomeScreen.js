@@ -1,16 +1,16 @@
 import React from 'react';
 import { View, StyleSheet, Dimensions, ScrollView, Text, TouchableOpacity, Image } from 'react-native';
 import MapView, { Marker, Callout } from 'react-native-maps';
-import { FontAwesome, Ionicons } from '@expo/vector-icons'; // You can use any icon library you prefer
+import LocationComponent from  './LocationComponent';
 
 const libraries = [
-  { name: 'Moffit Library', latitude: 37.8725369, longitude: -122.2634115, hours: '9am - 9pm', walk: '5' },
-  { name: 'Doe Library', latitude: 37.872211, longitude: -122.2618116, hours: '9am - 5pm', walk: '2' },
-  { name: 'Business Library', latitude: 37.8714692, longitude: -122.2560199, hours: '9am - 5pm', walk: '5' },
-  { name: 'Music Library', latitude: 37.8704483, longitude: -122.2610574, hours: '9am - 5pm', walk: '3' },
-  { name: 'Life Sciences Library', latitude: 37.871144, longitude: -122.2618197, hours: '9am - 5pm', walk: '10' },
-  { name: 'East Asian Library', latitude: 37.8735799, longitude: -122.2625545, hours: '9am - 5pm', walk: '7' },
-  { name: 'Soda Hall', latitude: 37.8755981, longitude: -122.2613614, hours: '9am - 6pm', walk: '10' },
+  { name: 'Moffit Library', latitude: 37.8725369, longitude: -122.2634115, hours: '9am - 9pm', walk: '5', pic: require('../assets/moffit.png') },
+  { name: 'Doe Library', latitude: 37.872211, longitude: -122.2618116, hours: '9am - 5pm', walk: '2', pic: require('../assets/doe.png') },
+  { name: 'Business Library', latitude: 37.8714692, longitude: -122.2560199, hours: '9am - 5pm', walk: '5', pic: require('../assets/bus.png') },
+  { name: 'Music Library', latitude: 37.8704483, longitude: -122.2610574, hours: '9am - 5pm', walk: '3', pic: require('../assets/music.png') },
+  { name: 'Life Sciences Library', latitude: 37.871144, longitude: -122.2618197, hours: '9am - 5pm', walk: '10', pic: require('../assets/lifesci.png') },
+  { name: 'East Asian Library', latitude: 37.8735799, longitude: -122.2625545, hours: '9am - 5pm', walk: '7', pic: require('../assets/eastasian.png') },
+  { name: 'Soda Hall', latitude: 37.8755981, longitude: -122.2613614, hours: '9am - 6pm', walk: '10', pic: require('../assets/moffit.png') },
   // Add more libraries with their coordinates
 ];
 
@@ -21,6 +21,9 @@ const HomeScreen = ({navigation}) => {
 
   const handleRightIconPress = () => {
     navigation.navigate('Friends')
+  };
+  const handleArrowPress = () => {
+    // Handle arrow click logic here
   };
   return (
     <View style={styles.container}>
@@ -37,11 +40,15 @@ const HomeScreen = ({navigation}) => {
           showsUserLocation={true}
           provider="google">
           <TouchableOpacity onPress={handleLeftIconPress} style={styles.iconContainerLeft}>
-            <Image source={require('../assets/fav.png')} />
+            <View>
+              <Image source={require('../assets/fav.png')} style={styles.icon}/>
+            </View>
           </TouchableOpacity>
         
           <TouchableOpacity onPress={handleRightIconPress} style={styles.iconContainerRight}>
-            <Image source={require('../assets/friends.png')} />
+            <View>
+              <Image source={require('../assets/friends.png')} style={styles.icon} />
+            </View>
           </TouchableOpacity>
           {libraries.map((library, index) => (
             <Marker key={index} coordinate={{latitude: library.latitude, longitude: library.longitude,}}>
@@ -62,7 +69,15 @@ const HomeScreen = ({navigation}) => {
       <View style={styles.listContainer}>
         <ScrollView>
           {/* List of scrollable components */}
-          {/* Add your scrollable components here */}
+          {libraries.map((library) => (
+            <LocationComponent
+              imageSource={library.pic}
+              name={library.name}
+              hours={library.hours}
+              walk={library.walk}
+              onPressArrow={handleArrowPress}
+            />
+          ))}
         </ScrollView>
       </View>
     </View>
@@ -92,9 +107,9 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 10,
     left: 10,
-    width: 35,
-    height: 35,
-    borderRadius: 20,
+    width: 50,
+    height: 50,
+    borderRadius: 30,
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
     alignItems: 'center',
     justifyContent: 'center',
@@ -103,14 +118,19 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 10,
     right: 10,
-    width: 35,
-    height: 35,
-    borderRadius: 20,
+    width: 50,
+    height: 50,
+    borderRadius: 30,
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
     alignItems: 'center',
     justifyContent: 'center',
   },
-
+  icon: {
+    flex: 1,
+    width: 50,
+    height: 50,
+    resizeMode: 'contain'
+  },
 });
 
 export default HomeScreen;
