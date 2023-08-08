@@ -16,12 +16,10 @@ const libraries = [
 
 const HomeScreen = ({navigation}) => {
   const handleLeftIconPress = () => {
-    // Handle left icon press action here
     navigation.navigate('Favorites');
   };
 
   const handleRightIconPress = () => {
-    // Handle right icon press action here
     navigation.navigate('Friends')
   };
   return (
@@ -36,14 +34,15 @@ const HomeScreen = ({navigation}) => {
             latitudeDelta: 0.01,
             longitudeDelta: 0.01,
           }}
-        >
-      <TouchableOpacity onPress={handleLeftIconPress} style={styles.iconContainerLeft}>
-        <Image source={require('../assets/fav.png')} />
-      </TouchableOpacity>
-      
-      <TouchableOpacity onPress={handleRightIconPress} style={styles.iconContainerRight}>
-        <Image source={require('../assets/friends.png')} />
-      </TouchableOpacity>
+          showsUserLocation={true}
+          provider="google">
+          <TouchableOpacity onPress={handleLeftIconPress} style={styles.iconContainerLeft}>
+            <Image source={require('../assets/fav.png')} />
+          </TouchableOpacity>
+        
+          <TouchableOpacity onPress={handleRightIconPress} style={styles.iconContainerRight}>
+            <Image source={require('../assets/friends.png')} />
+          </TouchableOpacity>
           {libraries.map((library, index) => (
             <Marker key={index} coordinate={{latitude: library.latitude, longitude: library.longitude,}}>
               <Callout>
@@ -87,7 +86,7 @@ const styles = StyleSheet.create({
   },
   listContainer: {
     flex: 1,
-    backgroundColor: 'grey',
+    backgroundColor: 'white',
   },
   iconContainerLeft: {
     position: 'absolute',

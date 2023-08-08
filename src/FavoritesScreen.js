@@ -3,11 +3,12 @@ import { View, StyleSheet, Dimensions, ScrollView, Text, TouchableOpacity, Image
 
 const FavoritesScreen = () => {
     return(
-        <View>
-            <Text>
-                hi
-            </Text>
-        </View>
+        <View style={styles.listContainer}>
+        <ScrollView>
+          {/* List of scrollable components */}
+          {/* Add your scrollable components here */}
+        </ScrollView>
+      </View>
     );
 };
 
@@ -15,6 +16,10 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center',
+      },
+    listContainer: {
+        flex: 1,
+        backgroundColor: 'white',
       },
 });
 
