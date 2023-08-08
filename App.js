@@ -30,7 +30,7 @@ const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Map" component={MapScreen} />
+        <Stack.Screen name="Home" component={MapScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
