@@ -1,6 +1,6 @@
 import React from 'react';
-import { View, StyleSheet, Dimensions, ScrollView, Text, TouchableOpacity} from 'react-native';
-import MapView, { Marker, Callout} from 'react-native-maps';
+import { View, StyleSheet, Dimensions, ScrollView, Text, TouchableOpacity, Image } from 'react-native';
+import MapView, { Marker, Callout } from 'react-native-maps';
 import { FontAwesome, Ionicons } from '@expo/vector-icons'; // You can use any icon library you prefer
 
 const libraries = [
@@ -14,13 +14,15 @@ const libraries = [
   // Add more libraries with their coordinates
 ];
 
-const HomeScreen = () => {
+const HomeScreen = ({navigation}) => {
   const handleLeftIconPress = () => {
     // Handle left icon press action here
+    navigation.navigate('Favorites');
   };
 
   const handleRightIconPress = () => {
     // Handle right icon press action here
+    navigation.navigate('Friends')
   };
   return (
     <View style={styles.container}>
@@ -35,12 +37,12 @@ const HomeScreen = () => {
             longitudeDelta: 0.01,
           }}
         >
-      <TouchableOpacity style={styles.iconContainerLeft}>
-        <FontAwesome name="circle" size={30} color="blue" />
+      <TouchableOpacity onPress={handleLeftIconPress} style={styles.iconContainerLeft}>
+        <Image source={require('../assets/fav.png')} />
       </TouchableOpacity>
       
-      <TouchableOpacity style={styles.iconContainerRight}>
-        <FontAwesome name="circle" size={30} color="green" />
+      <TouchableOpacity onPress={handleRightIconPress} style={styles.iconContainerRight}>
+        <Image source={require('../assets/friends.png')} />
       </TouchableOpacity>
           {libraries.map((library, index) => (
             <Marker key={index} coordinate={{latitude: library.latitude, longitude: library.longitude,}}>
@@ -91,8 +93,8 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 10,
     left: 10,
-    width: 40,
-    height: 40,
+    width: 35,
+    height: 35,
     borderRadius: 20,
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
     alignItems: 'center',
@@ -102,8 +104,8 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 10,
     right: 10,
-    width: 40,
-    height: 40,
+    width: 35,
+    height: 35,
     borderRadius: 20,
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
     alignItems: 'center',

@@ -1,28 +1,10 @@
-// import { StatusBar } from 'expo-status-bar';
-// import { StyleSheet, Text, View } from 'react-native';
-
-// export default function App() {
-//   return (
-//     <View style={styles.container}>
-//       <Text>Open up App.js to start working on your app!</Text>
-//       <StatusBar style="auto" />
-//     </View>
-//   );
-// }
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: '#fff',
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//   },
-// });
-
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import MapScreen from './src/MapScreen';
+import HomeScreen from './src/HomeScreen';
+import FavoritesScreen from './src/FavoritesScreen';
+import FriendsScreen from './src/FriendsScreen';
+import FriendsFavoritesScreen from './src/FriendsFavoritesScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -30,7 +12,10 @@ const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Home" component={MapScreen} />
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Favorites" component={FavoritesScreen} />
+        <Stack.Screen name="Friends" component={FriendsScreen} />
+        <Stack.Screen name="Friends Favorites" component={FriendsFavoritesScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
