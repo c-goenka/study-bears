@@ -1,28 +1,30 @@
 import React from 'react';
 import { View, StyleSheet, Dimensions, ScrollView, Text, TouchableOpacity, Image } from 'react-native';
 import MapView, { Marker, Callout } from 'react-native-maps';
-import { FontAwesome, Ionicons } from '@expo/vector-icons'; // You can use any icon library you prefer
+import LocationComponent from  './LocationComponent';
 
 const libraries = [
-  { name: 'Moffit Library', latitude: 37.8725369, longitude: -122.2634115, hours: '9am - 9pm', walk: '5' },
-  { name: 'Doe Library', latitude: 37.872211, longitude: -122.2618116, hours: '9am - 5pm', walk: '2' },
-  { name: 'Business Library', latitude: 37.8714692, longitude: -122.2560199, hours: '9am - 5pm', walk: '5' },
-  { name: 'Music Library', latitude: 37.8704483, longitude: -122.2610574, hours: '9am - 5pm', walk: '3' },
-  { name: 'Life Sciences Library', latitude: 37.871144, longitude: -122.2618197, hours: '9am - 5pm', walk: '10' },
-  { name: 'East Asian Library', latitude: 37.8735799, longitude: -122.2625545, hours: '9am - 5pm', walk: '7' },
-  { name: 'Soda Hall', latitude: 37.8755981, longitude: -122.2613614, hours: '9am - 6pm', walk: '10' },
-  // Add more libraries with their coordinates
+  { name: 'Moffit Library', latitude: 37.8725369, longitude: -122.2634115, hours: '9am - 9pm', walk: '5', pic: require('../assets/moffit.png') },
+  { name: 'Doe Library', latitude: 37.872211, longitude: -122.2618116, hours: '9am - 5pm', walk: '2', pic: require('../assets/doe.png') },
+  { name: 'Business Library', latitude: 37.8714692, longitude: -122.2560199, hours: '9am - 5pm', walk: '5', pic: require('../assets/bus.png') },
+  { name: 'Music Library', latitude: 37.8704483, longitude: -122.2610574, hours: '9am - 5pm', walk: '3', pic: require('../assets/music.png') },
+  { name: 'Life Sciences Library', latitude: 37.871144, longitude: -122.2618197, hours: '9am - 5pm', walk: '10', pic: require('../assets/lifesci.png') },
+  { name: 'East Asian Library', latitude: 37.8735799, longitude: -122.2625545, hours: '9am - 5pm', walk: '7', pic: require('../assets/eastasian.png') },
+  { name: 'Soda Hall', latitude: 37.8755981, longitude: -122.2613614, hours: '9am - 6pm', walk: '10', pic: require('../assets/moffit.png') },
 ];
 
 const HomeScreen = ({navigation}) => {
   const handleLeftIconPress = () => {
-    // Handle left icon press action here
     navigation.navigate('Favorites');
   };
-
   const handleRightIconPress = () => {
-    // Handle right icon press action here
     navigation.navigate('Friends')
+  };
+  const handlePullUpIconPress = () => {
+    navigation.navigate('All Locations')
+  };
+  const handleArrowPress = () => {
+    navigation.navigate('Moffitt Library')
   };
   return (
     <View style={styles.container}>
@@ -36,14 +38,18 @@ const HomeScreen = ({navigation}) => {
             latitudeDelta: 0.01,
             longitudeDelta: 0.01,
           }}
-        >
-      <TouchableOpacity onPress={handleLeftIconPress} style={styles.iconContainerLeft}>
-        <Image source={require('../assets/fav.png')} />
-      </TouchableOpacity>
-      
-      <TouchableOpacity onPress={handleRightIconPress} style={styles.iconContainerRight}>
-        <Image source={require('../assets/friends.png')} />
-      </TouchableOpacity>
+          showsUserLocation={true}>
+          <TouchableOpacity onPress={handleLeftIconPress} style={styles.iconContainerLeft}>
+            <View>
+              <Image source={require('../assets/fav.png')} style={styles.icon}/>
+            </View>
+          </TouchableOpacity>
+        
+          <TouchableOpacity onPress={handleRightIconPress} style={styles.iconContainerRight}>
+            <View>
+              <Image source={require('../assets/friends.png')} style={styles.icon} />
+            </View>
+          </TouchableOpacity>
           {libraries.map((library, index) => (
             <Marker key={index} coordinate={{latitude: library.latitude, longitude: library.longitude,}}>
               <Callout>
@@ -59,11 +65,30 @@ const HomeScreen = ({navigation}) => {
         </MapView>
       </View>
 
+      <View style={styles.showLocationsList}>
+        <TouchableOpacity onPress={handlePullUpIconPress}>
+          <View style={styles.showLocationsListButton}></View>
+        </TouchableOpacity>
+      </View>
+
+      <View style={styles.searchContainer}>
+        <Image source={require('../assets/search.png')} style={styles.search}/>
+        <Text>Search</Text>
+      </View>
+
       {/* Bottom Half - List */}
       <View style={styles.listContainer}>
         <ScrollView>
           {/* List of scrollable components */}
-          {/* Add your scrollable components here */}
+          {libraries.map((library) => (
+            <LocationComponent
+              imageSource={library.pic}
+              name={library.name}
+              hours={library.hours}
+              walk={library.walk}
+              onPressArrow={handleArrowPress}
+            />
+          ))}
         </ScrollView>
       </View>
     </View>
@@ -87,15 +112,39 @@ const styles = StyleSheet.create({
   },
   listContainer: {
     flex: 1,
-    backgroundColor: 'grey',
+    backgroundColor: 'white',
+  },
+  searchContainer: {
+    flex: 0.1,
+    backgroundColor: 'white',
+    borderTopWidth: 1,
+    borderBottomWidth: 1,
+    borderColor: 'rgba(0, 0, 0, 0.2)',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row'
+  },
+  showLocationsList: {
+    flex: 0.07,
+    backgroundColor: 'white',
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  showLocationsListButton: {
+    width: 98,
+    height: 7,
+    backgroundColor: 'black',
+    borderRadius: 10
   },
   iconContainerLeft: {
     position: 'absolute',
     top: 10,
     left: 10,
-    width: 35,
-    height: 35,
-    borderRadius: 20,
+    width: 50,
+    height: 50,
+    borderRadius: 30,
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
     alignItems: 'center',
     justifyContent: 'center',
@@ -104,14 +153,24 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 10,
     right: 10,
-    width: 35,
-    height: 35,
-    borderRadius: 20,
+    width: 50,
+    height: 50,
+    borderRadius: 30,
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
     alignItems: 'center',
     justifyContent: 'center',
   },
-
+  icon: {
+    flex: 1,
+    width: 50,
+    height: 50,
+    resizeMode: 'contain'
+  },
+  search: {
+    width: 12,
+    height: 12,
+    marginRight: 5
+  },
 });
 
 export default HomeScreen;
