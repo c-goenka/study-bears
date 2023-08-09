@@ -9,9 +9,9 @@ const libraries = [
   // Add more libraries with their coordinates
 ];
 
-const FavoritesScreen = () => {
+const FavoritesScreen = ({navigation}) => {
   const handleArrowPress = () => {
-    // Handle arrow click logic here
+    navigation.navigate('Moffitt Library')
   };
     return(
       <View style={styles.listContainer}>

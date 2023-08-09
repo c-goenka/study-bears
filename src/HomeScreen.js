@@ -11,19 +11,20 @@ const libraries = [
   { name: 'Life Sciences Library', latitude: 37.871144, longitude: -122.2618197, hours: '9am - 5pm', walk: '10', pic: require('../assets/lifesci.png') },
   { name: 'East Asian Library', latitude: 37.8735799, longitude: -122.2625545, hours: '9am - 5pm', walk: '7', pic: require('../assets/eastasian.png') },
   { name: 'Soda Hall', latitude: 37.8755981, longitude: -122.2613614, hours: '9am - 6pm', walk: '10', pic: require('../assets/moffit.png') },
-  // Add more libraries with their coordinates
 ];
 
 const HomeScreen = ({navigation}) => {
   const handleLeftIconPress = () => {
     navigation.navigate('Favorites');
   };
-
   const handleRightIconPress = () => {
     navigation.navigate('Friends')
   };
+  const handlePullUpIconPress = () => {
+    navigation.navigate('All Locations')
+  };
   const handleArrowPress = () => {
-    // Handle arrow click logic here
+    navigation.navigate('Moffitt Library')
   };
   return (
     <View style={styles.container}>
@@ -37,8 +38,7 @@ const HomeScreen = ({navigation}) => {
             latitudeDelta: 0.01,
             longitudeDelta: 0.01,
           }}
-          showsUserLocation={true}
-          provider="google">
+          showsUserLocation={true}>
           <TouchableOpacity onPress={handleLeftIconPress} style={styles.iconContainerLeft}>
             <View>
               <Image source={require('../assets/fav.png')} style={styles.icon}/>
@@ -63,6 +63,17 @@ const HomeScreen = ({navigation}) => {
             </Marker>
           ))}
         </MapView>
+      </View>
+
+      <View style={styles.showLocationsList}>
+        <TouchableOpacity onPress={handlePullUpIconPress}>
+          <View style={styles.showLocationsListButton}></View>
+        </TouchableOpacity>
+      </View>
+
+      <View style={styles.searchContainer}>
+        <Image source={require('../assets/search.png')} style={styles.search}/>
+        <Text>Search</Text>
       </View>
 
       {/* Bottom Half - List */}
@@ -103,6 +114,30 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white',
   },
+  searchContainer: {
+    flex: 0.1,
+    backgroundColor: 'white',
+    borderTopWidth: 1,
+    borderBottomWidth: 1,
+    borderColor: 'rgba(0, 0, 0, 0.2)',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row'
+  },
+  showLocationsList: {
+    flex: 0.07,
+    backgroundColor: 'white',
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  showLocationsListButton: {
+    width: 98,
+    height: 7,
+    backgroundColor: 'black',
+    borderRadius: 10
+  },
   iconContainerLeft: {
     position: 'absolute',
     top: 10,
@@ -130,6 +165,11 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
     resizeMode: 'contain'
+  },
+  search: {
+    width: 12,
+    height: 12,
+    marginRight: 5
   },
 });
 

@@ -5,6 +5,8 @@ import HomeScreen from './src/HomeScreen';
 import FavoritesScreen from './src/FavoritesScreen';
 import FriendsScreen from './src/FriendsScreen';
 import FriendsFavoritesScreen from './src/FriendsFavoritesScreen';
+import LocationsListScreen from './src/LocationsListScreen';
+import LocationScreen from './src/LocationScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -13,9 +15,11 @@ const App = () => {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="All Locations" component={LocationsListScreen} />
+        <Stack.Screen name="Moffitt Library" component={LocationScreen} />
         <Stack.Screen name="Favorites" component={FavoritesScreen} />
         <Stack.Screen name="Friends" component={FriendsScreen} />
-        <Stack.Screen name="Friends Favorites" component={FriendsFavoritesScreen} />
+        <Stack.Screen name="Chetan's Favorites" component={FriendsFavoritesScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
