@@ -9,7 +9,7 @@ const FriendComponent = ({ imageSource, name, onPressArrow }) => {
         <Text style={styles.text}>{name}</Text>
       </View>
       <View style={styles.arrowContainer}>
-        <TouchableOpacity onPress={onPressArrow}>
+        <TouchableOpacity onPress={onPressArrow} style={styles.clickContainer}>
             <Image
             source={require('../assets/arrow.png')}
             style={styles.arrow}
@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     margin: 10,
     padding: 30,
-    backgroundColor: '#D9D9D9',
+    backgroundColor: '#E6E6E6',
     borderRadius: '10',
   },
   textContainer: {
@@ -51,6 +51,14 @@ const styles = StyleSheet.create({
   arrow: {
     width: 20,
     height: 20,
+  },
+  clickContainer: {
+    width: 50,
+    height: 50,
+    left: 15,
+    backgroundColor: 'rgba(0, 0, 0, 0.0)',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
 
