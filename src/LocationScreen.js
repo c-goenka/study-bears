@@ -3,11 +3,16 @@ import { View, StyleSheet, Dimensions, ScrollView, Text, TouchableOpacity, Image
 
 const LocationScreen = ({navigation}) => {
     const img = require("../assets/empty-heart.png")
+    let fav = false
     const [imageAsset, setImageAsset] = useState(img)
   
     const handleImageChange = () => {
-      const newImg = require("../assets/heart.png")
-      setImageAsset(newImg)
+        fav = !fav;
+        if (fav) {
+            setImageAsset(require("../assets/heart.png"))
+        } else {
+            setImageAsset(require("../assets/empty-heart.png"))
+        }
     }
     return(
     <View style={styles.container}>
@@ -41,13 +46,13 @@ const LocationScreen = ({navigation}) => {
                 <Image source={require('../assets/restroom.png')} style={styles.icon}></Image>
                 <Image source={require('../assets/wheelchair.png')} style={styles.icon}></Image>
             </View>
-            <View style={styles.navButtonContainer}>
+            {/* <View style={styles.navButtonContainer}>
                 <TouchableOpacity>
                     <View style={styles.navButton}>
                         <Text style={styles.text}>Navigate</Text>
                     </View>
                 </TouchableOpacity>
-            </View>
+            </View> */}
         </ScrollView>
     </View>
     );
@@ -90,7 +95,8 @@ const styles = StyleSheet.create({
     iconsList: {
         flex: 1,
         flexDirection: 'row',
-        margin: 15
+        margin: 15,
+        marginBottom: 70
     },
     icon: {
         flex: 1,

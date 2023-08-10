@@ -39,17 +39,18 @@ const HomeScreen = ({navigation}) => {
             longitudeDelta: 0.01,
           }}
           showsUserLocation={true}>
-          <TouchableOpacity onPress={handleLeftIconPress} style={styles.iconContainerLeft}>
-            <View>
-              <Image source={require('../assets/fav.png')} style={styles.icon}/>
+          <TouchableOpacity onPress={handleLeftIconPress}>
+            <View style={styles.iconContainerLeft}>
+                <Image source={require('../assets/fav.png')} style={styles.icon}/>
             </View>
           </TouchableOpacity>
         
-          <TouchableOpacity onPress={handleRightIconPress} style={styles.iconContainerRight}>
-            <View>
-              <Image source={require('../assets/friends.png')} style={styles.icon} />
+          <TouchableOpacity onPress={handleRightIconPress}>
+            <View style={styles.iconContainerRight}>
+                <Image source={require('../assets/friends.png')} style={styles.icon}/>
             </View>
           </TouchableOpacity>
+          
           {libraries.map((library, index) => (
             <Marker key={index} coordinate={{latitude: library.latitude, longitude: library.longitude,}}>
               <Callout>
@@ -65,15 +66,18 @@ const HomeScreen = ({navigation}) => {
         </MapView>
       </View>
 
-      <View style={styles.showLocationsList}>
+      {/* <View style={styles.showLocationsList}>
         <TouchableOpacity onPress={handlePullUpIconPress}>
-          <View style={styles.showLocationsListButton}></View>
+          <Text style={{fontSize: 13, color: 'blue'}}>All Locations</Text>
         </TouchableOpacity>
-      </View>
+      </View> */}
 
       <View style={styles.searchContainer}>
-        <Image source={require('../assets/search.png')} style={styles.search}/>
-        <Text>Search</Text>
+        {/* <Image source={require('../assets/search.png')} style={styles.search}/>
+        <Text>Search</Text> */}
+        <TouchableOpacity onPress={handlePullUpIconPress}>
+          <Text style={{fontSize: 13, color: 'blue', fontWeight: 'bold', textDecorationLine: 'underline'}}>All Locations</Text>
+        </TouchableOpacity>
       </View>
 
       {/* Bottom Half - List */}
@@ -164,6 +168,11 @@ const styles = StyleSheet.create({
     flex: 1,
     width: 50,
     height: 50,
+    resizeMode: 'contain'
+  },
+  menu: {
+    width: 17,
+    height: 17,
     resizeMode: 'contain'
   },
   search: {
