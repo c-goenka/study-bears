@@ -20,26 +20,27 @@ In order to explore my prototype, you will need access to the Expo app (either o
 
 ## App Pages:
 
-1. Home and Map
+***
+### 1. Home and Map
 ![IMG_2096](https://github.com/c-goenka/study-bears/assets/70137663/c25890d6-f2ce-4b54-8679-1fe5518be69b)
+***
 
-
-2. Individual Location Details
+### 2. Individual Location Details
 ![IMG_2097](https://github.com/c-goenka/study-bears/assets/70137663/7138134f-da82-42ae-9d1a-8249bb467ddf)
+***
 
-
-3. Adding a Location to Favorites
+### 3. Adding a Location to Favorites
 ![IMG_2098](https://github.com/c-goenka/study-bears/assets/70137663/8e59eee8-e4b3-448f-b04c-505262bddf63)
+***
 
-
-4. Favorite Locations
+### 4. Favorite Locations
 ![IMG_2099](https://github.com/c-goenka/study-bears/assets/70137663/1e8d4c29-19eb-4ab7-b8da-afc1b78ca899)
+***
 
-
-5. Friends Page
+### 5. Friends Page
 ![IMG_2100](https://github.com/c-goenka/study-bears/assets/70137663/5e5732c0-11e1-4b9e-886d-6c52546813c6)
+***
 
-
-6. Friend's Favorite Locations
+### 6. Friend's Favorite Locations
 ![IMG_2101](https://github.com/c-goenka/study-bears/assets/70137663/c828b160-68aa-46a4-b412-4b5936a40555)
-
+***
