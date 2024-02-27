@@ -1,5 +1,5 @@
 # Bear Territory
-I used React Native, Expo, and Apple’s Xcode simulator to bring my high fidelity prototype to life. The prototype is compatible with iOS platforms. The design of the app is most compatible with recent iterations of the iPhone (ex. iPhoneX and above). We recommend running the app on the iPhone 12 Pro Max.
+A mobile application designed to help Berkeley students find nearby study locations that match their desired preferences. This is Bear Territory!
 
 <img width="2560" alt="Bear-Territory" src="https://github.com/c-goenka/study-bears/assets/70137663/4433a8f6-c8fc-4200-9a7f-4d1e7ce488b8">
 
